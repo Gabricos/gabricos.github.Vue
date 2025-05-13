@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe (Tris) con Vue.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Tic Tac Toe (Tris)</h1>
+        
+        <div class="game-container">
+            <div class="status">{{ status }}</div>
+            
+            <div class="board">
+                <div 
+                    v-for="(cell, index) in board" 
+                    :key="index" 
+                    class="cell" 
+                    :class="{ 
+                        'x': cell === 'X', 
+                        'o': cell === 'O',
+                        'winning': winningCells.includes(index)
+                    }"
+                    @click="makeMove(index)"
+                >
+                    {{ cell }}
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button @click="resetGame">Nuova Partita</button>
+                <button @click="resetScores">Azzera Punteggi</button>
+            </div>
+            
+            <div class="score">
+                <div class="score-item x">
+                    <div>Giocatore X</div>
+                    <div>{{ scores.X }} vittorie</div>
+                </div>
+                <div class="score-item">
+                    <div>Pareggi</div>
+                    <div>{{ scores.ties }}</div>
+                </div>
+                <div class="score-item o">
+                    <div>Giocatore O</div>
+                    <div>{{ scores.O }} vittorie</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+</body>
+</html>
